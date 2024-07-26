@@ -1,31 +1,5 @@
 gsap.registerPlugin(ScrollTrigger);
 
-function createScrollFades() {
-  gsap.utils.toArray(".pinned_section").forEach((pinnedSection) => {
-    const bgArr = pinnedSection.querySelector(".pinned_media").children;
-
-    const parTriggersArr = pinnedSection.querySelectorAll(".step");
-
-    parTriggersArr.forEach((par, index) => {
-      ScrollTrigger.create({
-        fastScrollEnd: true,
-        trigger: par,
-        start: `top ${par.classList.contains("delay") ? "70" : "90"}%`,
-        onEnter: () => {
-          bgArr[par.dataset.imageIndex || index + 1].classList.add(
-            "make_visible"
-          );
-        },
-        onLeaveBack: () => {
-          bgArr[par.dataset.imageIndex || index + 1].classList.remove(
-            "make_visible"
-          );
-        },
-      });
-    });
-  });
-}
-
 function animateTitle() {
   const titlePics = document.querySelectorAll(".title_pic_wrapper img");
 
@@ -70,12 +44,12 @@ function randomiseHistory() {
   gsap.utils.toArray(".history_media").forEach((el, index) => {
     let x = randomNum(-15, 15);
     let y = randomNum(-30, 30);
-    let min = window.innerWidth < 599 ? -50 : -100;
+    let min = window.innerWidth < 599 ? -10 : -100;
     let max = window.innerWidth < 599 ? 50 : 100;
 
     if (index % 5 === 3 || index % 6 === 5) {
       // 4th or 6th el
-      x = randomNum(min, 20);
+      x = randomNum(min, 10);
     } else if (index % 5 === 4 || index % 6 === 2) {
       // 5th or 3rd el
       x = randomNum(-20, max);
@@ -88,7 +62,7 @@ function randomiseHistory() {
       x: 0,
       y: 0,
       scale: 1,
-      // opacity: 0,
+
       rotate: 0,
     });
 
@@ -98,7 +72,6 @@ function randomiseHistory() {
         getWindowSize().width < 599 ? 90 : 90,
         getWindowSize().width < 599 ? 95 : 95
       )}%`,
-      // start: `top bottom`,
       onEnter: () => {
         gsap.to(el, {
           x: x,
@@ -106,8 +79,8 @@ function randomiseHistory() {
           scale: scale,
           rotate: rotate,
           opacity: 1,
-          duration: randomNum(0.6, 1), // Example duration
-          delay: randomNum(0.08, 0.15), // Example duration
+          duration: randomNum(0.6, 1),
+          delay: randomNum(0.08, 0.15),
         });
       },
     });
@@ -127,129 +100,8 @@ function randomiseHistory() {
   });
 }
 
-function animateEventExplainer() {
-  const eventExplainerSection = document.querySelector(".event_explainer");
-  const bgMedia = eventExplainerSection.querySelector(".pinned_background>div");
-
-  gsap.utils
-    .toArray(".event_explainer .chapter")
-    .forEach((chapter, index, arr) => {
-      // const tl = gsap.timeline({
-      //   scrollTrigger: {
-      //     trigger: chapter,
-      //     start: 'top 80%',
-      //     scrub: true,
-      //   }
-      // }).to
-      ScrollTrigger.create({
-        // markers: true,
-        trigger: chapter,
-        start: "center center",
-        end: "bottom top",
-        endTrigger: arr[index - 1],
-        onEnter: () => {
-          switch (index) {
-            case 0:
-              gsap.to(bgMedia, { xPercent: 100 });
-
-              break;
-            case 1:
-              gsap.to(bgMedia, { xPercent: 0 });
-
-              break;
-            case 2:
-              gsap.to(bgMedia, { xPercent: 50 });
-
-              break;
-            case 3:
-              gsap.to(bgMedia, { xPercent: -50 });
-
-              break;
-
-            default:
-              break;
-          }
-        },
-        onLeaveBack: () => {
-          switch (index) {
-            case 0:
-              gsap.to(bgMedia, { xPercent: 100 });
-
-              break;
-            case 1:
-              gsap.to(bgMedia, { xPercent: 0 });
-
-              break;
-            case 2:
-              gsap.to(bgMedia, { xPercent: 50 });
-
-              break;
-            case 3:
-              gsap.to(bgMedia, { xPercent: -50 });
-
-              break;
-
-            default:
-              break;
-          }
-        },
-      });
-    });
-}
-
 function animateCriteria() {
   const spans = gsap.utils.toArray("#criteria span");
-
-  // spans.forEach((el, index) => {
-  //   // Set initial properties for spans
-  //   gsap.set(el, {
-  //     y: index % 2 === 0 ? 100 : -100, // Change to -100 if you want them to animate from the top
-  //     // opacity: 0,
-  //   });
-
-  //   // Reset on scroll back
-  //   ScrollTrigger.create({
-  //     trigger: "#criteria",
-  //     start: "top bottom",
-  //     // fastScrollEnd: true,
-  //     onLeaveBack: () => {
-  //       gsap.set(el, {
-  //         y: index % 2 === 0 ? 100 : -100, // Change to -100 if you animated from the top
-  //         opacity: 0,
-  //         overwrite: true,
-  //         // duration: 0
-  //       });
-  //     },
-  //   });
-  // });
-
-  // // Create ScrollTrigger to animate spans on enter
-  // ScrollTrigger.create({
-  //   // markers: true,
-  //   trigger: "#criteria",
-  //   start: "top 90%",
-  //   // fastScrollEnd: true,
-  //   onEnter: () => {
-  //     gsap.to("#criteria span", {
-  //       y: 0,
-  //       opacity: 1,
-  //       duration: 1, // Duration for the animation
-  //       ease: "power2.out",
-  //       stagger: 0.1,
-  //       overwrite: true,
-  //     });
-  //   },
-  //   onEnterBack: () => {
-  //     gsap.to("#criteria span", {
-  //       y: 0,
-  //       opacity: 1,
-  //       duration: 1, // Duration for the animation
-  //       ease: "power2.out",
-  //       stagger: 0.1,
-  //       overwrite: true,
-  //     });
-  //   },
-  // });
 
   const criteriaSection = document.querySelector(".criteria");
   const parTriggersArr = criteriaSection.querySelectorAll(".chapter");
@@ -270,7 +122,11 @@ function animateCriteria() {
     "originality_annotations",
   ];
 
-  parTriggersArr.forEach((par, index) => {
+  parTriggersArr.forEach((par, index, arr) => {
+    let prevAnnotation =
+      index < 1
+        ? null
+        : document.querySelector(`.${annotationsClasses[index - 1]}`);
     let annotations = document.querySelector(`.${annotationsClasses[index]}`);
     let annotationLength = annotations.childElementCount;
     let annotationChildren = annotations.children;
@@ -287,9 +143,11 @@ function animateCriteria() {
     }
 
     ScrollTrigger.create({
-      markers: true,
+      // markers: true,
       trigger: par,
-      start: `${index === 0 ? "top" : "top"} ${index === 0 ? "top" : "60%"}`,
+      start: `${index === 0 ? "top" : "top"} ${
+        index === 0 ? "center" : "center"
+      }`,
       onEnter: () => {
         gsap.to(spans, {
           opacity: 0.2,
@@ -301,8 +159,16 @@ function animateCriteria() {
         gsap.to(spans[index], {
           opacity: 1,
         });
+
+        if (prevAnnotation) {
+          gsap.to(prevAnnotation, { opacity: 0 });
+        }
       },
       onLeaveBack: () => {
+        if (prevAnnotation) {
+          gsap.to(prevAnnotation, { opacity: 1 });
+        }
+
         if (index < 1) {
           gsap.to(spans, {
             opacity: 1,
@@ -317,36 +183,20 @@ function animateCriteria() {
           });
         }
         video.classList.remove(colours[index]);
-        gsap.to(annotations, { opacity: 0, backgroundColor: "transparent" });
-      },
-      onLeave: () => {
-        if (index !== parTriggersArr.length - 1) {
-          gsap.to(annotations, { opacity: 0 });
-        }
+        gsap.to(annotations, { opacity: 0 });
       },
       onEnterBack: () => {
         gsap.to(annotations, { opacity: 1 });
       },
       onUpdate: (self) => {
-        annotationTimeline.progress(self.progress);
+        if (self.progress >= 0.1) {
+          const adjustedProgress = (self.progress - 0.1) / 0.9;
+          console.log(adjustedProgress);
 
-        // if (self.progress >= 0.1) {
-        //   const adjustedProgress = (self.progress - 0.1) / 0.9;
-        //   console.log(adjustedProgress);
-
-        //   annotationTimeline.progress(adjustedProgress);
-        // } else {
-        //   annotationTimeline.progress(0);
-        // }
-        // if (self.progress >= 0.1 && self.progress <= 0.9) {
-        //   const adjustedProgress = (self.progress - 0.1) / 0.8;
-
-        //   annotationTimeline.progress(adjustedProgress);
-        // } else if (self.progress < 0.1) {
-        //   annotationTimeline.progress(0);
-        // } else if (self.progress > 0.9) {
-        //   annotationTimeline.progress(1);
-        // }
+          annotationTimeline.progress(adjustedProgress);
+        } else {
+          annotationTimeline.progress(0);
+        }
       },
     });
   });
