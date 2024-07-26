@@ -659,7 +659,7 @@ body {
 .physical_attributes_scroll_wrapper {
   position: relative;
   --cover-size: 30vmin;
-  display: grid;
+  /* display: grid; */
   position: relative;
   height: max-content;
   left: 20%;
@@ -672,7 +672,7 @@ body {
   margin: 0 auto;
   height: 100vh;
   width: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -713,7 +713,7 @@ body {
   width: 100%;
   /* height: 100%; */
   /* box-shadow: 10px 10px 80px #000000; */
-  filter: drop-shadow(10px 10px 80px #000000);
+  filter: drop-shadow(10px 10px 30px #000000);
   scale: 1.01;
   /* aspect-ratio: 9/16; */
 }
