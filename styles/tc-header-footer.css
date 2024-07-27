@@ -1,7 +1,7 @@
 /* -------- Header --------- */
 
 header {
-  position: absolute;
+  /* position: absolute; */
   z-index: 9999;
   padding: var(--space--small) var(--space--base);
   background-color: var(--neutral-900);

@@ -5,13 +5,14 @@
   margin: 0;
   padding: 0;
   font: inherit;
-  line-height: calc(
-    1em + 0.7rem
-  ); /* Calculates perfect line height for small and large font sizes */
+  line-height: calc(1em + 0.7rem);
 }
 html {
+  width: 100%;
+  height: 100%;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  -webkit-overflow-scrolling: touch;
 }
 img,
 picture,
@@ -46,6 +47,9 @@ b {
 }
 body {
   overscroll-behavior: none;
+  height: 100%;
+  width: 100%;
+  position: relative;
 }
 @media (prefers-reduced-motion: no-preference) {
   :has(:target) {
