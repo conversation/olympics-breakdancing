@@ -19,7 +19,7 @@ function animateTitle() {
     .timeline({
       scrollTrigger: {
         trigger: ".title_wrapper",
-        start: "top top",
+        start: "top-=50px top",
         end: "bottom top",
         scrub: 1,
       },
@@ -225,63 +225,90 @@ function animateCriteria() {
 }
 
 function animateMoves() {
-  let listElements = gsap.utils.toArray(".cards li");
+  let moveCards = gsap.utils.toArray(".move_card");
+  let textElements = gsap.utils.toArray(
+    ".physical_attributes .pinned_foreground_content_wrapper"
+  );
 
-  // Initial set for all child images and paragraphs within list items
-  gsap.set(".cards div", {
-    rotateY: -45,
-    scale: 0.8,
-    opacity: 0,
-  });
+  moveCards.forEach((card, index, arr) => {
+    const tl = gsap.timeline({ ease: "power2.in" });
 
-  const TIMELINE = gsap.timeline({
-    immediateRender: false,
-    ease: "linear",
-    scrollTrigger: {
-      trigger: ".physical_attributes .pinned_foreground",
-      start: `top-=20% top`,
-      end: `bottom bottom`,
-      scrub: true,
-      fastScrollEnd: true,
-    },
-  });
+    if (index === 0) {
+      tl.fromTo(
+        card,
+        {
+          xPercent: 0,
+          scale: 1,
+          alpha: 1,
+          rotationY: 0,
+          duration: 1,
+        },
+        {
+          xPercent: -100,
+          scale: 0.8,
+          alpha: 0,
+          rotationY: 45,
+          duration: 1,
+        }
+      );
 
-  listElements.forEach((box, index) => {
-    let coverWrapper = box.querySelector("div");
-    let isLastElement = index === listElements.length - 1;
+      ScrollTrigger.create({
+        animation: tl,
+        trigger: textElements[index],
+        start: "center top",
+        end: `bottom top`,
+        scrub: true,
+        fastScrollEnd: true,
+      });
+    } else {
+      let isLast = index === arr.length - 1;
 
-    TIMELINE.to(
-      coverWrapper,
-      {
-        scale: 1,
-        opacity: 1,
-        rotationY: 0,
+      tl.from(card, {
+        xPercent: 100,
+        scale: 0.8,
+        alpha: 0,
+        rotationY: -45,
         duration: 1,
-      },
-      `-=1`
-    ).to(coverWrapper, {
-      scale: isLastElement ? 1 : 0.8,
-      opacity: isLastElement ? 1 : 0,
-      rotationY: isLastElement ? 0 : 45,
-      duration: isLastElement ? 0 : 1,
-    });
+      })
+        .to(card, {
+          xPercent: 0,
+          scale: 1,
+          alpha: 1,
+          rotationY: 0,
+          duration: 1,
+        })
+        .to(card, {
+          xPercent: isLast ? 0 : -100,
+          scale: isLast ? 1 : 0.8,
+          alpha: isLast ? 1 : 0,
+          rotationY: isLast ? 0 : 45,
+          duration: 1,
+        });
 
-    TIMELINE.to(
-      listElements, // shift the images over
-      {
-        x: `${-100 * (index + 1)}%`,
-        duration: 1,
-      },
-      isLastElement ? `-=1` : `-=2`
-    );
+      ScrollTrigger.create({
+        animation: tl,
+        trigger: textElements[index - 1],
+        start: "center top",
+        end: `bottom+=100% top`,
+        scrub: true,
+        fastScrollEnd: true,
+      });
+    }
   });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.documentElement.style.setProperty(
-    "--vh",
-    window.outerHeight * 0.01 + "px"
-  );
+  // document.documentElement.style.setProperty(
+  //   "--vh",
+  //   window.outerHeight * 0.01 + "px"
+  // );
+
+  // if (window.visualViewport) {
+  //   document.documentElement.style.setProperty(
+  //     "--vh",
+  //     window.visualViewport.height * 0.01 + "px"
+  //   );
+  // }
 
   animateTitle();
 
