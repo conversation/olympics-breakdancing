@@ -121,6 +121,7 @@
   --shadow-base: 5px 5px 15px rgba(0, 0, 0, 0.2);
   --shadow-large: 9px 11px 39px -9px rgba(0, 0, 0, 0.75);
 
+  /* --article-background-colour: #f5e3e1; */
   --article-background-colour: #f1e1e1;
   --text-colour: var(--neutral-900);
   --link-colour: var(--neutral-800);
@@ -190,7 +191,7 @@ body {
 
 .title_pic_wrapper img {
   width: auto;
-  aspect-ratio: 9/16;
+  /* aspect-ratio: 9/16; */
 }
 
 .title {
@@ -364,7 +365,7 @@ body {
 
 .gradient {
   width: 100%;
-  background: rgb(241, 225, 225);
+  background: var(--article-background-colour);
   height: 100px;
   position: absolute;
   z-index: 999;
@@ -374,7 +375,7 @@ body {
   top: 0;
   background: linear-gradient(
     180deg,
-    rgb(241, 225, 225, 1) 0%,
+    var(--article-background-colour) 0%,
     rgba(255, 255, 255, 0) 100%
   );
 }
@@ -383,7 +384,7 @@ body {
   bottom: 0;
   background: linear-gradient(
     0deg,
-    rgb(241, 225, 225, 1) 0%,
+    var(--article-background-colour) 0%,
     rgba(255, 255, 255, 0) 100%
   );
 }
@@ -967,7 +968,7 @@ aside h2 {
   }
 
   .physical_attributes .pinned_foreground_content {
-    background-color: rgba(241, 225, 225, 0.8);
+    background-color: rgba(245, 227, 225, 0.8);
     border-radius: 10px;
   }
 
