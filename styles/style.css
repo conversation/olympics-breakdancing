@@ -135,19 +135,6 @@ body {
   background-color: var(--article-background-colour);
   color: var(--text-colour);
   height: 100%;
-
-  overflow-x: hidden;
-}
-
-.media_placeholder {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid coral;
-  height: auto;
-  width: 100%;
-  aspect-ratio: 16/9;
-  margin-bottom: var(--space--medium);
 }
 
 .block_content {
@@ -165,12 +152,11 @@ body {
   display: grid;
   position: relative;
   height: calc(var(--vh, 1vh) * 80);
+  height: 80lvh;
 }
 
 .title_text {
   align-self: flex-end;
-  /* padding-top: calc(var(--vh, 1vh) * 20); */
-  /* padding-top: min(30%, 100px); */
 }
 
 .title_pic_wrapper {
