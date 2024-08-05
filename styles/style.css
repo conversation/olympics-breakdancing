@@ -156,7 +156,8 @@ body {
 }
 
 .title_text {
-  align-self: flex-end;
+  margin-top: 3rem;
+  align-self: center;
 }
 
 .title_pic_wrapper {
@@ -287,42 +288,40 @@ body {
 /* -------- Event section ------- */
 
 .event_explainer_wrapper {
+  padding-top: 3rem;
   position: relative;
   margin-bottom: 4rem;
 }
 
 .event_explainer_wrapper img {
+  padding-top: 6rem;
   height: 100%;
   width: 100%;
   user-select: none;
 }
 
 .event_explainer_text {
+  position: absolute;
   width: 60%;
   left: 50%;
   transform: translate(-50%, 0);
   text-align: center;
 }
-
-.event_explainer_text:nth-child(2) {
-  position: absolute;
-  top: 11.5%;
-}
 .event_explainer_text:nth-child(3) {
   position: absolute;
-  top: 28%;
+  top: 21%;
 }
 .event_explainer_text:nth-child(4) {
   position: absolute;
-  top: 43%;
+  top: 41%;
 }
 .event_explainer_text:nth-child(5) {
   position: absolute;
-  top: 60%;
+  top: 62%;
 }
 .event_explainer_text:nth-child(6) {
   position: absolute;
-  top: 78%;
+  top: 70%;
 }
 
 /* -------- Criteria section ------- */
