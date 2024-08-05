@@ -572,30 +572,6 @@ body {
   left: 40%;
 }
 
-.gray {
-  filter: url(#gray400);
-}
-
-.red {
-  filter: url(#red400);
-}
-
-.blue {
-  filter: url(#blue400);
-}
-
-.green {
-  filter: url(#green400);
-}
-
-.yellow {
-  filter: url(#yellow400);
-}
-
-.indigo {
-  filter: url(#indigo400);
-}
-
 .criteria .pinned_foreground_content {
   height: 100lvh;
   height: calc(var(--vh, 1vh) * 100);
@@ -889,7 +865,7 @@ aside h2 {
 
   .author_bios_wrapper {
     display: flex;
-    flex-direction: column;
+    justify-content: space-around;
   }
 
   .label_center {
