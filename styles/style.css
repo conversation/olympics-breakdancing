@@ -945,11 +945,33 @@ aside h2 {
     font-size: var(--font-size--x-small);
   }
 
+  .event_explainer_wrapper {
+    padding-top: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .event_explainer_wrapper img {
+    padding-top: 5rem;
+  }
+
   .event_explainer_text {
     width: 100%;
     left: 0;
     transform: translate(0, 0);
     text-align: center;
+  }
+
+  .event_explainer_text:nth-child(3) {
+    top: 22%;
+  }
+  .event_explainer_text:nth-child(4) {
+    top: 42%;
+  }
+  .event_explainer_text:nth-child(5) {
+    top: 62%;
+  }
+  .event_explainer_text:nth-child(6) {
+    top: 71%;
   }
 
   .physical_attributes .pinned_foreground_content {
