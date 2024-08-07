@@ -1,14 +1,10 @@
 gsap.registerPlugin(ScrollTrigger);
 
-function playVideo(video) {
-  var isPlaying =
-    video.currentTime > 0 &&
-    !video.paused &&
-    !video.ended &&
-    video.readyState > video.HAVE_CURRENT_DATA;
+function playVid(video) {
+  var playPromise = video.play();
 
-  if (!isPlaying) {
-    video.play();
+  if (playPromise !== undefined) {
+    playPromise.then(() => {}).catch((error) => {});
   }
 }
 
@@ -94,14 +90,13 @@ function randomiseHistory() {
     });
 
     ScrollTrigger.create({
+      fastScrollEnd: true,
       trigger: historyVideo,
       start: "top bottom",
       end: "bottom top",
-      onEnter: () => playVideo(historyVideo),
-      // onEnter: () => historyVideo.play(),
+      onEnter: () => playVid(historyVideo),
       onLeave: () => historyVideo.pause(),
-      onEnterBack: () => playVideo(historyVideo),
-      // onEnterBack: () => historyVideo.play(),
+      onEnterBack: () => playVid(historyVideo),
       onLeaveBack: () => historyVideo.pause(),
     });
   });
@@ -112,6 +107,7 @@ function animateCriteria() {
   const spans = gsap.utils.toArray("#criteria span");
   const criteriaSection = document.querySelector(".criteria");
   const annotationWrappers = document.querySelectorAll(".criteria_annotations");
+  const scrollerLine = document.querySelector(".scroller_line");
 
   const annotationsClasses = [
     "technique_annotations",
@@ -119,6 +115,18 @@ function animateCriteria() {
     "vocabulary_annotations",
     "musicality_annotations",
     "originality_annotations",
+  ];
+
+  const annotationColours = [
+    "var(--red-400)",
+
+    "var(--blue-400)",
+
+    "var(--green-400)",
+
+    "var(--yellow-400)",
+
+    "var(--indigo-400",
   ];
 
   const annotationsTimeslines = [];
@@ -173,11 +181,14 @@ function animateCriteria() {
       onUpdate: (self) => {
         // set video time
         video.currentTime = videoDuration * self.progress;
+        scrollerLine.style.width = `${self.progress * 100}%`;
 
         // video.pause();
 
         // get annotation index
         let index = Math.floor(self.progress * annotationsClasses.length);
+
+        scrollerLine.style.backgroundColor = annotationColours[index];
 
         if (index !== spans.length) {
           let subProgress = gsap.utils.mapRange(
@@ -291,32 +302,31 @@ function setCorrectVideoFormat() {
   const video = document.querySelector(".criteria_video");
 
   if (isFirefox() && window.innerWidth > 600) {
-    video.src =
-      "https://cdn.theconversation.com/infographics/1080/36ce44534d00c786f1d4b7422f08fbc9534a4ef4/site/videos/PXL_20240719_064134661_with_colour.webm";
-    // If Firefox, set the source to video2.mp4
-    //     video.innerHTML = `<source
-    //   src="https://cdn.theconversation.com/infographics/1080/36ce44534d00c786f1d4b7422f08fbc9534a4ef4/site/videos/PXL_20240719_064134661_with_colour.webm"
-    //   type="video/webm"
-    // /><source
-    //   src="https://cdn.theconversation.com/infographics/1080/36ce44534d00c786f1d4b7422f08fbc9534a4ef4/site/videos/PXL_20240719_064134661_with_colour.mp4"
-    //   type="video/mp4"
-    // />`;
+    // video.src =
+    //   "https://cdn.theconversation.com/infographics/1080/36ce44534d00c786f1d4b7422f08fbc9534a4ef4/site/videos/PXL_20240719_064134661_with_colour.webm";
+    video.innerHTML = `<source
+      src="https://cdn.theconversation.com/infographics/1080/36ce44534d00c786f1d4b7422f08fbc9534a4ef4/site/videos/PXL_20240719_064134661_with_colour.webm"
+      type="video/webm"
+    /><source
+      src="https://cdn.theconversation.com/infographics/1080/36ce44534d00c786f1d4b7422f08fbc9534a4ef4/site/videos/PXL_20240719_064134661_with_colour.mp4"
+      type="video/mp4"
+    />`;
     document.documentElement.style.setProperty(
       "--article-background-colour",
       "#f5e3e1"
     );
   } else {
-    video.src =
-      "https://cdn.theconversation.com/infographics/1080/36ce44534d00c786f1d4b7422f08fbc9534a4ef4/site/videos/PXL_20240719_064134661_with_colour.mp4";
-    // For other browsers, set the source to video1.mp4
+    // video.src =
+    //   "https://cdn.theconversation.com/infographics/1080/36ce44534d00c786f1d4b7422f08fbc9534a4ef4/site/videos/PXL_20240719_064134661_with_colour.mp4";
+
     video.innerHTML = `<source
-    src="https://cdn.theconversation.com/infographics/1080/36ce44534d00c786f1d4b7422f08fbc9534a4ef4/site/videos/PXL_20240719_064134661_with_colour.mp4"
-    type="video/mp4"
-  />
-  <source
-    src="https://cdn.theconversation.com/infographics/1080/36ce44534d00c786f1d4b7422f08fbc9534a4ef4/site/videos/PXL_20240719_064134661_with_colour.webm"
-    type="video/webm"
-  />`;
+      src="https://cdn.theconversation.com/infographics/1080/36ce44534d00c786f1d4b7422f08fbc9534a4ef4/site/videos/PXL_20240719_064134661_with_colour.mp4"
+      type="video/mp4"
+    />
+    <source
+      src="https://cdn.theconversation.com/infographics/1080/36ce44534d00c786f1d4b7422f08fbc9534a4ef4/site/videos/PXL_20240719_064134661_with_colour.webm"
+      type="video/webm"
+    />`;
   }
 }
 
