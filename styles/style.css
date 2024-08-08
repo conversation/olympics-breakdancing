@@ -151,20 +151,21 @@ body {
 .title_wrapper {
   display: grid;
   position: relative;
-  height: 80vh;
+  height: 100vh;
+  /* height: 100%; */
   /* height: calc(var(--vh, 1vh) * 80);
   height: 80vh; */
 }
 
 .title_text {
-  margin-top: 4rem;
+  /* margin-top: 4rem; */
   align-self: center;
 }
 
 .title_pic_wrapper {
   user-select: none;
-  display: grid;
-  place-items: center;
+  /* display: grid;
+  place-items: center; */
 }
 
 .title_pic_wrapper > div {
@@ -233,7 +234,6 @@ body {
 .title_container {
   display: grid;
   place-content: center;
-  margin-top: 0 !important;
 }
 
 /* -------- History section ------- */
@@ -855,7 +855,7 @@ aside h2 {
   }
 
   .title_text {
-    padding-top: 25vmin;
+    /* padding-top: 25vmin; */
   }
 
   .title_pic_wrapper {
