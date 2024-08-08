@@ -851,7 +851,7 @@ aside h2 {
   }
 
   .title_wrapper {
-    height: unset;
+    /* height: unset; */
   }
 
   .title_text {
@@ -932,24 +932,30 @@ aside h2 {
     transform: unset;
   }
 
+  .hide_mobile {
+    display: none;
+  }
+
   .history_wrapper {
     grid-template-rows: repeat(11, minmax(150px, 20svh));
   }
 
   .history_text_wrapper {
-    width: 190%;
+    /* width: 190%; */
+    width: 90%;
+    grid-column: span 3;
   }
 
   .history_text {
     text-shadow: none;
   }
 
-  .history_wrapper span {
+  /* .history_wrapper span {
     background-color: var(--article-background-colour);
     padding: 4px 0;
     font-size: 12px;
     transform: translate(-25%, 0);
-  }
+  } */
 
   .history_media {
     width: 30vw;

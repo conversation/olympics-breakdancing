@@ -50,7 +50,7 @@ function randomiseHistory() {
     let x = randomNum(-15, 15);
     let y = randomNum(-30, 30);
     let min = window.innerWidth < 599 ? -10 : -100;
-    let max = window.innerWidth < 599 ? 50 : 100;
+    let max = window.innerWidth < 599 ? 10 : 100;
 
     historyVideo.pause();
 
