@@ -185,7 +185,7 @@ body {
 
 .title {
   text-align: center;
-  font-size: var(--font-size--xl5);
+  font-size: 3rem;
   font-family: var(--font-family--base);
   font-weight: 900;
   margin-inline: auto;
